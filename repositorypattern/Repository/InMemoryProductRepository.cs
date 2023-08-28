@@ -1,4 +1,5 @@
-﻿using repositorypattern.Model;
+﻿using repositorypattern.Exceptions;
+using repositorypattern.Model;
 using repositorypattern.Repository;
 
 public class InMemoryProductRepository : IProductRepository
@@ -12,7 +13,16 @@ public class InMemoryProductRepository : IProductRepository
 
     public Product GetById(int id)
     {
-        return _products.FirstOrDefault(p => p.Id == id);
+        var product = _products.FirstOrDefault(p => p.Id == id);
+        if (product != null)
+        {
+            return product;
+        }
+        else
+        {
+            throw new NotFoundException("Id not found");
+        }
+        
     }
 
     public void Add(Product product)

@@ -16,7 +16,7 @@ namespace repositorypattern.Controllers
             _productRepository = productRepository;
         }
 
-        [HttpGet]
+        [HttpGet] 
         public IActionResult GetAll()
         {
             var products = _productRepository.GetAll();
