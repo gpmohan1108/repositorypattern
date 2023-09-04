@@ -1,19 +1,27 @@
-﻿using repositorypattern.Exceptions;
+﻿using repositorypattern;
+using repositorypattern.Exceptions;
 using repositorypattern.Model;
 using repositorypattern.Repository;
 
 public class InMemoryProductRepository : IProductRepository
 {
-    private readonly List<Product> _products = new List<Product>();
-
+   
+    private readonly dBContext _dBcontext;
+    public InMemoryProductRepository(dBContext dbcontext)
+    {
+            _dBcontext = dbcontext;
+    }
     public IEnumerable<Product> GetAll()
     {
-        return _products;
+       return _dBcontext.Products.ToList();
+        
     }
 
     public Product GetById(int id)
     {
-        var product = _products.FirstOrDefault(p => p.Id == id);
+        //This is for the exception handling
+        var products = _dBcontext.Products.ToList();
+        var product = products.FirstOrDefault(p => p.Id == id);
         if (product != null)
         {
             return product;
@@ -27,7 +35,9 @@ public class InMemoryProductRepository : IProductRepository
 
     public void Add(Product product)
     {
-        _products.Add(product);
+        _dBcontext.Products.Add(product);
+
+        _dBcontext.SaveChanges();
     }
 
     public void Update(Product product)
@@ -37,15 +47,17 @@ public class InMemoryProductRepository : IProductRepository
         {
             existingProduct.Name = product.Name;
             existingProduct.Price = product.Price;
+            _dBcontext.SaveChanges();
         }
     }
 
     public void Delete(int id)
     {
+        var products = _dBcontext.Products.ToList();
         var productToRemove = GetById(id);
         if (productToRemove != null)
         {
-            _products.Remove(productToRemove);
+            products.Remove(productToRemove);
         }
     }
 }

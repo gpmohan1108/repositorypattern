@@ -8,6 +8,7 @@ using Amazon;
 
 namespace repositorypattern.Controllers
 {
+    //This is The post and get the messages to sqs
   
     [Route("api/[controller]")]
     [ApiController]

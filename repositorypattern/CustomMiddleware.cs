@@ -5,6 +5,7 @@ namespace repositorypattern
 {
     public class CustomMiddleware : IMiddleware
     {
+        //global exception handling using custom middleware
         public async Task InvokeAsync(HttpContext context, RequestDelegate next)
         {
             try

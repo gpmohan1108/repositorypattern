@@ -7,10 +7,11 @@ namespace repositorypattern.Model
         public int Id { get; set; }
         public string Name { get; set; }
         public decimal Price { get; set; }
-        // Other properties
+      
     }
     public class ErrorResponse
     {
+        //exception handling
         public int statuscode { get; set; }
         public string message { get; set; }
         public override string ToString()

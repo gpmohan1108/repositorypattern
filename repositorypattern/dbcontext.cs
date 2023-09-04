@@ -3,9 +3,9 @@ using repositorypattern.Model;
 
 namespace repositorypattern
 {
-    public class dBcontext : DbContext
+    public class dBContext : DbContext
     {
-        public dBcontext(DbContextOptions<dBcontext> options):base(options)
+        public dBContext(DbContextOptions<dBContext> options):base(options)
         {       
         }
 
